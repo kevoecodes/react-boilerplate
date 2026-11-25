@@ -140,7 +140,7 @@ export default function DataTable({
                 onClick={() => setFiltersOpen(true)}
                 className={
                   filtersActive || filtersOpen
-                    ? '!border-primary !text-primary !bg-primary/5'
+                    ? '!border-[#962c30] !text-[#962c30] !bg-[#962c30]/5'
                     : undefined
                 }
               />
@@ -202,6 +202,7 @@ function RowActions({ actions, record, inline }) {
             danger={action.danger}
             icon={action.icon}
             aria-label={action.label}
+            className={action.danger ? undefined : '!text-gray-600 hover:!text-primary'}
             onClick={(e) => {
               e.stopPropagation();
               action.onClick(record);

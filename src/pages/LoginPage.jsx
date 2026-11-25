@@ -34,7 +34,10 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-layout p-4">
       <Card bordered={false} className="w-full max-w-sm shadow-md">
         <div className="mb-6 text-center">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded bg-primary text-xl font-bold text-white">
+          <div
+            className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded text-xl font-bold text-white"
+            style={{ backgroundColor: '#962c30' }}
+          >
             R
           </div>
           <Typography.Title level={3} className="!mb-1">

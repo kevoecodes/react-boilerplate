@@ -11,7 +11,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: tokens.colorPrimary,
+        // Prefer CSS var so HMR picks up brand changes; hex fallback matches tokens.colorPrimary.
+        primary: 'var(--color-primary, #962c30)',
         success: tokens.colorSuccess,
         warning: tokens.colorWarning,
         danger: tokens.colorError,

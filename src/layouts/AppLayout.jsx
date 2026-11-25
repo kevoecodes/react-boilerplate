@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { cloneElement, isValidElement, useEffect, useMemo, useState } from 'react';
 import { Avatar, Breadcrumb, Button, Dropdown, Grid, Layout, Menu, Typography } from 'antd';
 import {
   DownOutlined,
@@ -10,15 +10,24 @@ import {
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { findMenuTrail, menuItems } from '@/routes/menu';
+import { tokens } from '@/utils/theme';
 
 const { Header, Sider, Content } = Layout;
 const APP_NAME = import.meta.env.VITE_APP_NAME || 'React Boilerplate';
 const COLLAPSE_KEY = 'rb.sider-collapsed';
+const PRIMARY = tokens.colorPrimary;
+
+const withPrimaryIcon = (icon) =>
+  isValidElement(icon)
+    ? cloneElement(icon, {
+        style: { ...(icon.props.style ?? {}), color: PRIMARY },
+      })
+    : icon;
 
 const toAntdItems = (items) =>
   items.map(({ key, label, icon, children }) => ({
     key,
-    icon,
+    icon: withPrimaryIcon(icon),
     label,
     children: children ? toAntdItems(children) : undefined,
   }));
@@ -94,22 +103,29 @@ export default function AppLayout() {
         breakpoint="lg"
         collapsedWidth={screens.xs ? 0 : 80}
         width={240}
-        className="!sticky top-0 h-screen overflow-auto"
+        theme="light"
+        className="!sticky top-0 h-screen overflow-auto !border-0 !border-r !border-solid !border-border"
       >
-        <Link to="/" className="flex h-16 items-center gap-3 px-6 text-white no-underline">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-primary font-bold">
+        <Link to="/" className="flex h-16 items-center gap-3 px-6 no-underline">
+          <span
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded font-bold text-white"
+            style={{ backgroundColor: '#962c30' }}
+          >
             R
           </span>
-          {!collapsed && <span className="truncate text-base font-semibold">{APP_NAME}</span>}
+          {!collapsed && (
+            <span className="truncate text-base font-semibold text-gray-800">{APP_NAME}</span>
+          )}
         </Link>
         <Menu
-          theme="dark"
+          theme="light"
           mode="inline"
           items={toAntdItems(menuItems)}
           selectedKeys={[selectedKey]}
           openKeys={collapsed ? undefined : openKeys}
           onOpenChange={setOpenKeys}
           onClick={({ key }) => key.startsWith('/') && navigate(key)}
+          className="border-0 px-2 [&_.ant-menu-item]:rounded-md [&_.ant-menu-submenu-title]:rounded-md"
         />
       </Sider>
       <Layout>
@@ -124,7 +140,7 @@ export default function AppLayout() {
           <div className="ml-auto">
             <Dropdown menu={userMenu} trigger={['click']} placement="bottomRight">
               <Button type="text" className="flex h-10 items-center gap-2">
-                <Avatar size="small" className="bg-primary" icon={<UserOutlined />} />
+                <Avatar size="small" style={{ backgroundColor: '#962c30' }} icon={<UserOutlined />} />
                 <Typography.Text className="hidden sm:inline">{user?.name}</Typography.Text>
                 <DownOutlined className="text-xs text-muted" />
               </Button>

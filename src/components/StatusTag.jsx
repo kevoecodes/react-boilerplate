@@ -8,7 +8,7 @@ const COLORS = {
   processing: 'blue',
   completed: 'green',
   cancelled: 'red',
-  admin: 'purple',
+  admin: 'red',
   user: 'default',
 };
 

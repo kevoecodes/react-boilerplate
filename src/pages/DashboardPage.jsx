@@ -23,7 +23,7 @@ export default function DashboardPage() {
       value: data?.users,
       hint: `${data?.active_users ?? 0} active`,
       icon: <TeamOutlined />,
-      color: 'bg-indigo-50 text-primary',
+      color: 'bg-red-50 text-primary',
     },
     {
       title: 'Products',

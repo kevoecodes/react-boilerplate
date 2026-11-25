@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #962c30;
+  --color-primary-hover: #7a2328;
+}
+
 html,
 body,
 #root {
@@ -12,4 +17,21 @@ body {
   margin: 0;
   background: #f5f6fa;
   -webkit-font-smoothing: antialiased;
+}
+
+/* FMS-style sidebar: NSSF maroon icons (avoid Tailwind primary HMR stale values) */
+.ant-layout-sider .ant-menu-item .anticon,
+.ant-layout-sider .ant-menu-submenu-title .anticon {
+  color: #962c30 !important;
+}
+
+.ant-layout-sider .ant-menu-item:hover .anticon,
+.ant-layout-sider .ant-menu-item-active .anticon,
+.ant-layout-sider .ant-menu-item-selected .anticon,
+.ant-layout-sider .ant-menu-submenu-title:hover .anticon {
+  color: #ffffff !important;
+}
+
+.ant-layout-sider .ant-menu-submenu-selected > .ant-menu-submenu-title {
+  color: #962c30 !important;
 }
